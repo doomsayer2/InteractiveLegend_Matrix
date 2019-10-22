@@ -3,17 +3,17 @@ const sourceData2 = require("./data/tempTallinn.json"); // Tallinn Chart data
 const sourceData3 = require("./data/tempMunich.json"); // Munich Chart data
 
 const TEXTS = {
-  ONE: "Each bar represents a data item.",
+  ONE: 'The chart is based on colored cells.',
   TWO:
-    'The height of each bar shows e.g., the <span class="hT">average temperature (y-axis)</span> in <span class="hT">Oslo</span> for a certain month.',
+    'The <span class="hT">average temperature change</span> per <span class="hT">month</span> is plotted in columns and the <span class="hT">cities</span> in rows. ',
   THREE:
-    'The horizontal position of each bar represents the <span class="hT">month (x-axis)</span>.',
+    'A darker color indicates a bigger <span class="hT">difference in average temperature</span> and a light color a smaller difference (<span class="hT">blue</span> = negative value change, <span class="hT">white</span> = no change, <span class="hT">brown</span> = positive value change).',
   FOUR:
-    'An <span class="hT">average temperature</span> of <span class="hT">-4 °C</span> was measured in <span class="hT">Oslo in February</span>.',
+    '<span class="hT">Munich</span> shows a major temperature change in <span class="hT">February</span> (between the two years).',
   FIVE:
-    'The <span class="hT">average temperature</span> in <span class="hT">August</span> was higher in <span class="hT">Tallinn</span> than in <span class="hT">Oslo</span>.',
+    'In <span class="hT">Tallinn</span>, the <span class="hT">average temperature</span> increased in the last <span class="hT">quarter</span>.',
   SIX:
-    'In 2018, the <span class="hT">average temperature</span> in <span class="hT">February</span> was below 0°C in each of the three cities <span class="hT">Oslo</span>, <span class="hT">Munich</span>, and <span class="hT">Tallinn</span>.'
+    'Across all <span class="hT">cities</span>, there is more change visible in the <span class="hT">first half</span> of the year than in the <span class="hT">second half</span> of the year.'
 };
 
 const TEXTGROUPS = {
