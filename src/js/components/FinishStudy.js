@@ -1,20 +1,19 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { Divider, Row, Col, Avatar, Button } from 'antd';
-import { MAX_HINTS } from '../shared/constants';
+import React, { Fragment } from 'react';
+import { Divider, Row, Col, Avatar } from 'antd';
+// import { MAX_HINTS } from '../shared/constants';
 
 const FinsihStudy = ({ mode }) => {
-  const [enabled, setEnabled] = useState(false);
+  // const [enabled, setEnabled] = useState(false);
 
-  useEffect(() => {
-    if (mode === MAX_HINTS - 1) {
-      setEnabled(true);
-    }
-  });
+  // useEffect(() => {
+  //   if (mode === MAX_HINTS - 1) {
+  //     setEnabled(true);
+  //   }
+  // });
 
-  const onFinishTest = () => {
-    const lastLocation = document.referrer;
-    window.location.href = lastLocation;
-  };
+  // const onFinishTest = () => {
+  //   window.close();
+  // };
 
   return (
     <Fragment>
@@ -29,20 +28,26 @@ const FinsihStudy = ({ mode }) => {
           </Avatar>
         </Col>
         <Col span={16}>
-          <p style={{ fontStyle: 'italic' }}>
-            "If you are finished with exploring the visualization please click
-            the button below and go back to your survey if you are not
-            redirected automatically. <strong>Thank You!</strong>"
+          <p style={{ fontStyle: 'italic', marginTop: 6 + 'px' }}>
+            "If you had a good understanding of the bar chart, please return to
+            the survey window and close this window. <strong>Thank You!</strong>
+            "
           </p>
         </Col>
       </Row>
-      <Row type="flex" justify="start">
+      {/* <Row type="flex" justify="start" style={{ marginBottom: 40 + 'px' }}>
         <Col span={4} push={20}>
-          <Button disabled={!enabled} type="primary" shape="round" block onClick={onFinishTest}>
+          <Button
+            disabled={!enabled}
+            type="primary"
+            shape="round"
+            block
+            onClick={onFinishTest}
+          >
             Done
           </Button>
         </Col>
-      </Row>
+      </Row> */}
     </Fragment>
   );
 };
