@@ -89,10 +89,10 @@ class App extends Component {
             <Divider />
             <div id="vizHeader" style={{ marginTop: 40 + 'px' }}>
               <Row type="flex" justify="start">
-                <Col md={12} lg={12} xxl={8}>
+                <Col md={15} lg={15} xxl={8}>
                   <h6 className="vizDesc">{parse(VIZ_DESC)}</h6>
                 </Col>
-                <Col md={12} lg={12} xxl={8} className="pullRight">
+                <Col md={9} lg={9} xxl={8} className="pullRight">
                   <ModeSwitcher
                     mode={mode}
                     changeShowAllHints={this.changeShowAllHints}
@@ -118,18 +118,12 @@ class App extends Component {
             </div>
             <div id="vizMain">
               <Row type="flex" justify="start">
-                <Col md={12} lg={12} xxl={8}>
+                <Col md={15} lg={15} xxl={8}>
                   <Row type="flex" justify="center">
                     <VegaChart mode={mode} view={view} chartID={1} />
                   </Row>
-                  <Row type="flex" justify="center">
-                    <VegaChart mode={mode} view={view} chartID={2} />
-                  </Row>
-                  <Row type="flex" justify="center">
-                    <VegaChart mode={mode} view={view} chartID={3} />
-                  </Row>
                 </Col>
-                <Col md={12} lg={12} xxl={8}>
+                <Col md={9} lg={9} xxl={8}>
                   <div id="dynamicLegend">
                     <Legend
                       mode={mode}

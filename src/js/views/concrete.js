@@ -1,6 +1,4 @@
-const sourceData1 = require("./data/tempOslo.json"); // Oslo Chart data
-const sourceData2 = require("./data/tempTallinn.json"); // Tallinn Chart data
-const sourceData3 = require("./data/tempMunich.json"); // Munich Chart data
+const sourceData = require('./data/tempAllCities.json'); // All cities data
 
 const TEXTS = {
   ONE: 'The chart is based on colored cells.',
@@ -17,8 +15,8 @@ const TEXTS = {
 };
 
 const TEXTGROUPS = {
-  g1: "Reading",
-  g2: "Using"
+  g1: 'Reading',
+  g2: 'Using'
 };
 
 export class ConcreteDataProvider {
@@ -26,10 +24,6 @@ export class ConcreteDataProvider {
     switch (chartID) {
       case 1:
         return this.viz;
-      case 2:
-        return this.viz2;
-      case 3:
-        return this.viz3;
       default:
         return this.viz;
     }
@@ -59,96 +53,76 @@ export class ConcreteDataProvider {
   }
 
   constructor() {
-    // Config for first chart -- here it is Oslo
+    // Config for the chart
     this.viz = {
-      mark: { type: "bar" },
+      data: {
+        values: sourceData
+      },
       spec: {
-        mark: { type: "bar" },
+        mark: {
+          type: 'rect',
+          tooltip: null
+        },
         encoding: {
-          x: {
-            field: "date",
-            type: "ordinal",
+          y: {
+            field: 'a',
+            type: 'nominal',
+            title: 'City',
             axis: {
-              title: "Month",
-              labelAngle: 0
+              labelColor: 'black',
+              tickColor: 'white'
             }
           },
-          y: {
-            field: "temp",
-            type: "quantitative",
-            title: "Average temperature in °C"
-          },
-          color: {
-            value: "lightgrey"
-          }
-        },
-        title: "Average temperature in Oslo, Norway in 2018",
-        width: 400
-      },
-      data: {
-        values: sourceData1
-      }
-    };
-
-    // Config for the second chart -- here it is
-    this.viz2 = {
-      mark: { type: "bar" },
-      spec: {
-        mark: { type: "bar" },
-        encoding: {
           x: {
-            field: "date",
-            type: "ordinal",
+            field: 'b',
+            type: 'ordinal',
+            title: 'Month',
             axis: {
-              title: "Month",
-              labelAngle: 0
+              orient: 'top',
+              labelColor: 'black',
+              labelAngle: 0,
+              tickColor: 'white'
             }
           },
-          y: {
-            field: "temp",
-            type: "quantitative",
-            title: "Average temperature in °C"
-          }, 
           color: {
-            value: "lightgrey"
+            field: 'c',
+            type: 'quantitative'
           }
         },
-        title: "Average temperature in Tallinn, Estonia in 2018",
-        width: 400
-      },
-      data: {
-        values: sourceData2
-      }
-    };
-
-    // Config for the third chart -- here it is
-    this.viz3 = {
-      mark: { type: "bar" },
-      spec: {
-        mark: { type: "bar" },
-        encoding: {
-          x: {
-            field: "date",
-            type: "ordinal",
-            axis: {
-              title: "Month",
-              labelAngle: 0
+        layer: [
+          {
+            mark: {
+              type: 'rect'
+            },
+            encoding: {
+              color: {
+                field: 'c',
+                type: 'quantitative',
+                title: 'Value Change',
+                legend: true,
+                scale: {
+                  domain: [-9, 0, 9],
+                  range: ['steelblue', '#FDFDFD', '#D2B48C']
+                }
+              }
             }
+          }
+        ],
+        config: {
+          scale: {
+            rangeStep: 40
           },
-          y: {
-            field: "temp",
-            type: "quantitative",
-            title: "Average temperature in °C"
-          }, 
-          color: {
-            value: "lightgrey"
+          axis: {
+            grid: true,
+            bandPosition: 0
+          },
+          legend: {
+            gradientDirection: 'horizontal'
           }
         },
-        title: "Average temperature in Munich, Germany in 2018",
-        width: 400
-      },
-      data: {
-        values: sourceData3
+        width: 500,
+        height: 170,
+        title: 'Average temperature change in °C between 1990 and 1991'
       }
     };
 
