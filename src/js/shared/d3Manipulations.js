@@ -97,6 +97,50 @@ const createHintThree = () => {
 };
 
 const createHintFour = () => {
+  const munich = d3
+    .select('.vegaViz1 > svg')
+    .selectAll('.role-axis-label')
+    .nodes()[1];
+  const munichText = d3.select(munich).select('text');
+  const feb = d3
+    .select('.vegaViz1 > svg')
+    .selectAll('.role-axis-label')
+    .nodes()[0];
+  const febText = d3.select(
+    d3
+      .select(feb)
+      .selectAll('text')
+      .nodes()[1]
+  );
+
+  munichText.style('fill', '#C51B7D').attr('font-weight', 'bold');
+  febText.style('fill', '#C51B7D').attr('font-weight', 'bold');
+
+  const paths = d3.select('.vegaViz1 > svg').selectAll('path');
+  const oneCell = d3.select(paths.nodes()[4]);
+  const oneCellBox = oneCell.node().getBBox();
+
+  const hint4Group = d3
+    .select('.vegaViz1 > svg')
+    .select('.layer_0_marks')
+    .append('g')
+    .classed('customD3Hints', true);
+
+  hint4Group
+    .append('circle')
+    .attr('r', 10)
+    .attr('cx', oneCellBox.x + oneCellBox.width / 2)
+    .attr('cy', oneCellBox.y + oneCellBox.height / 2)
+    .style('stroke', '#C51B7D')
+    .style('fill', '#C51B7D');
+  hint4Group
+    .append('text')
+    .attr('x', oneCellBox.x + oneCellBox.width / 2)
+    .attr('y', oneCellBox.y + oneCellBox.height / 2 + 5)
+    .attr('text-anchor', 'middle')
+    .attr('fill', 'white')
+    .text('4');
+
   return 4;
 };
 
@@ -124,6 +168,25 @@ const removeAllHints = () => {
     .select('text')
     .style('fill', 'rgb(0,0,0)')
     .attr('font-weight', 'bold');
+
+  const munich = d3
+    .select('.vegaViz1 > svg')
+    .selectAll('.role-axis-label')
+    .nodes()[1];
+  const munichText = d3.select(munich).select('text');
+  const feb = d3
+    .select('.vegaViz1 > svg')
+    .selectAll('.role-axis-label')
+    .nodes()[0];
+  const febText = d3.select(
+    d3
+      .select(feb)
+      .selectAll('text')
+      .nodes()[1]
+  );
+
+  munichText.style('fill', 'rgb(0,0,0)').attr('font-weight', 'normal');
+  febText.style('fill', 'rgb(0,0,0)').attr('font-weight', 'normal');
 };
 
 export {
