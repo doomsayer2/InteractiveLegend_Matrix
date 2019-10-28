@@ -151,19 +151,20 @@ const createHintFive = () => {
     .nodes()[1];
   const tallinnText = d3.select(tallinn).select('text:nth-child(3)');
   const xAxisLabel = d3
-  .select('.vegaViz1 > svg')
-  .selectAll('.role-axis-label')
-  .nodes()[0];
+    .select('.vegaViz1 > svg')
+    .selectAll('.role-axis-label')
+    .nodes()[0];
   const sept = d3.select(xAxisLabel).select('text:nth-child(9)');
   const oct = d3.select(xAxisLabel).select('text:nth-child(10)');
   const nov = d3.select(xAxisLabel).select('text:nth-child(11)');
   const dez = d3.select(xAxisLabel).select('text:nth-child(12)');
   const dezTransform = dez.attr('transform');
-  let dezBox = dezTransform.substring(dezTransform.indexOf('(') + 1, dezTransform.indexOf(')'))
-  .split(',');
+  let dezBox = dezTransform
+    .substring(dezTransform.indexOf('(') + 1, dezTransform.indexOf(')'))
+    .split(',');
   dezBox = dezBox.map(e => parseInt(e, 0));
 
-// febBox = febBox.map(e => parseInt(e, 0));
+  // febBox = febBox.map(e => parseInt(e, 0));
   tallinnText.style('fill', '#C51B7D').attr('font-weight', 'bold');
   sept.style('fill', '#C51B7D').attr('font-weight', 'bold');
   oct.style('fill', '#C51B7D').attr('font-weight', 'bold');
@@ -195,6 +196,72 @@ const createHintFive = () => {
 };
 
 const createHintSix = () => {
+  const yGrid = d3.select('.vegaViz1 > svg').select('.role-axis-grid');
+
+  const juneLine = yGrid.select('line:nth-child(7)');
+  const juneLineTransfrom = juneLine.attr('transform');
+  let juneLineBox = juneLineTransfrom.substring(juneLineTransfrom.indexOf('(') + 1, juneLineTransfrom.indexOf(')')).split(',');
+  juneLineBox = juneLineBox.map(e => parseInt(e, 0));
+  let juneLineLength = parseInt(juneLine.attr('y2'), 0);
+
+  const dezLine = d3.select('.role-axis').node().getBBox();
+
+  // Increase svg size in order to add lines below chart also move the chart back up half of the increased value
+  const heightOffset = 60;
+  const oldHeight = d3.select('svg').attr('height');
+  d3.select('svg').attr('height', parseInt(oldHeight, 0) + heightOffset);
+  const oldTransform = d3.select('svg').select('g').attr('transform');
+  const oldTransformValues = oldTransform.substring(oldTransform.indexOf('(') + 1, oldTransform.indexOf(')')).split(',');
+  d3.select('svg').select('g').attr('transform', `translate(${oldTransformValues[0]}, ${oldTransformValues[1] - heightOffset / 2})`);
+
+  const hint6Group = d3
+    .select('.vegaViz1 > svg')
+    .select('.layer_0_marks')
+    .append('g')
+    .classed('customD3Hints', true);
+
+  hint6Group
+    .append('line')
+    .attr('x1', juneLineBox[0])
+    .attr('y1', juneLineBox[1])
+    .attr('x2', juneLineBox[0])
+    .attr('y2', juneLineLength)
+    .attr('stroke', '#C51B7D')
+    .attr('stroke-width', 2);
+
+  hint6Group
+    .append('line')
+    .attr('x1', 10)
+    .attr('y1', juneLineLength + 15)
+    .attr('x2', juneLineBox[0] - 10)
+    .attr('y2', juneLineLength + 15)
+    .attr('stroke', '#C51B7D')
+    .attr('stroke-width', 2);
+  
+  hint6Group
+    .append('line')
+    .attr('x1', juneLineBox[0] + 10)
+    .attr('y1', juneLineLength + 15)
+    .attr('x2', dezLine.width + 35)
+    .attr('y2', juneLineLength + 15)
+    .attr('stroke', '#C51B7D')
+    .attr('stroke-width', 2);
+  
+  hint6Group
+    .append('circle')
+    .attr('r', 10)
+    .attr('cx', juneLineBox[0] / 2)
+    .attr('cy', juneLineLength + 30)
+    .style('stroke', '#C51B7D')
+    .style('fill', '#C51B7D');
+  hint6Group
+    .append('text')
+    .attr('x', juneLineBox[0] / 2)
+    .attr('y', juneLineLength + 35)
+    .attr('text-anchor', 'middle')
+    .attr('fill', 'white')
+    .text('6');
+
   return 6;
 };
 
@@ -239,9 +306,9 @@ const removeAllHints = () => {
   tallinnText.style('fill', 'rgb(0,0,0)').attr('font-weight', 'normal');
 
   const xAxisLabel = d3
-  .select('.vegaViz1 > svg')
-  .selectAll('.role-axis-label')
-  .nodes()[0];
+    .select('.vegaViz1 > svg')
+    .selectAll('.role-axis-label')
+    .nodes()[0];
   const sept = d3.select(xAxisLabel).select('text:nth-child(9)');
   const oct = d3.select(xAxisLabel).select('text:nth-child(10)');
   const nov = d3.select(xAxisLabel).select('text:nth-child(11)');
