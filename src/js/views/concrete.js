@@ -1,13 +1,13 @@
-const sourceData = require('./data/tempAllCities.json'); // All cities data
+const sourceData = require("./data/tempAllCities.json"); // All cities data
 
 const TEXTS = {
-  ONE: 'The chart is based on colored cells.',
+  ONE: "The chart is based on colored cells.",
   TWO:
     'The <span class="hT">average temperature change</span> per <span class="hT">month</span> is plotted in columns and the <span class="hT">cities</span> in rows. ',
   THREE:
-    'A darker color indicates a bigger <span class="hT">difference in average temperature</span> and a light color a smaller difference (<span class="hT">blue</span> = negative value change, <span class="hT">white</span> = no change, <span class="hT">brown</span> = positive value change).',
+    'A dark color indicates a big and a light color a small <span class="hT">difference in average temperature</span> (<span class="hT">blue</span> = negative value change, <span class="hT">white</span> = no change, <span class="hT">brown</span> = positive value change).',
   FOUR:
-    '<span class="hT">Munich</span> shows a major temperature change in <span class="hT">February</span> (between the two years).',
+    '<span class="hT">Munich</span> shows a strong temperature change between the two years in <span class="hT">February</span>.',
   FIVE:
     'In <span class="hT">Tallinn</span>, the <span class="hT">average temperature</span> increased in the last <span class="hT">quarter</span>.',
   SIX:
@@ -15,8 +15,8 @@ const TEXTS = {
 };
 
 const TEXTGROUPS = {
-  g1: 'Reading',
-  g2: 'Using'
+  g1: "Reading",
+  g2: "Using"
 };
 
 export class ConcreteDataProvider {
@@ -60,69 +60,73 @@ export class ConcreteDataProvider {
       },
       spec: {
         mark: {
-          type: 'rect',
+          type: "rect",
           tooltip: null
         },
         encoding: {
           y: {
-            field: 'a',
-            type: 'nominal',
-            title: 'City',
+            field: "a",
+            type: "nominal",
+            title: "City",
             axis: {
-              labelColor: 'black',
-              tickColor: 'white'
+              labelColor: "black",
+              tickColor: "white"
             }
           },
           x: {
-            field: 'b',
-            type: 'ordinal',
-            title: 'Month',
+            field: "b",
+            type: "ordinal",
+            title: "Month",
             axis: {
-              orient: 'top',
-              labelColor: 'black',
+              orient: "top",
+              labelColor: "black",
               labelAngle: 0,
-              tickColor: 'white'
+              tickColor: "white"
             }
           },
           color: {
-            field: 'c',
-            type: 'quantitative'
+            field: "c",
+            type: "quantitative"
           }
         },
         layer: [
           {
             mark: {
-              type: 'rect'
+              type: "rect"
             },
             encoding: {
               color: {
-                field: 'c',
-                type: 'quantitative',
-                title: 'Value Change',
+                field: "c",
+                type: "quantitative",
+                title: "Value Change",
                 legend: true,
                 scale: {
                   domain: [-9, 0, 9],
-                  range: ['steelblue', '#FDFDFD', '#D2B48C']
+                  range: ["steelblue", "#FDFDFD", "#D2B48C"]
                 }
               }
             }
           }
         ],
-        config: {
+        config: {        
           scale: {
             rangeStep: 40
           },
           axis: {
             grid: true,
-            bandPosition: 0
+            bandPosition: 0,
+            labelFontSize: 13,
+            titleFontSize: 14
           },
           legend: {
-            gradientDirection: 'horizontal'
+            gradientDirection: "horizontal",
+            titleFontSize: 13,
+            labelFontSize: 13
           }
         },
         width: 500,
         height: 170,
-        title: 'Average temperature change in °C between 1990 and 1991'
+        title: {text: "Average temperature change in °C between 1990 and 1991", fontSize: 15},
       }
     };
 

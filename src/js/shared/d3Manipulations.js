@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 
 const createHintOne = () => {
   const paths = d3.select('.vegaViz1 > svg').selectAll('path');
-  const oneCell = d3.select(paths.nodes()[38]);
+  const oneCell = d3.select(paths.nodes()[25]);
   const oneCellBox = oneCell.node().getBBox();
 
   const hint1Group = d3
@@ -81,14 +81,14 @@ const createHintThree = () => {
   hint3Group
     .append('circle')
     .attr('r', 10)
-    .attr('cx', legendTextLen + 16)
-    .attr('cy', 1)
+    .attr('cx', legendTextLen/2)
+    .attr('cy', -15)
     .style('stroke', '#C51B7D')
     .style('fill', '#C51B7D');
   hint3Group
     .append('text')
-    .attr('x', legendTextLen + 16)
-    .attr('y', 6)
+    .attr('x', legendTextLen/2)
+    .attr('y', -10)
     .attr('text-anchor', 'middle')
     .attr('fill', 'white')
     .text('3');
@@ -171,6 +171,13 @@ const createHintFive = () => {
   nov.style('fill', '#C51B7D').attr('font-weight', 'bold');
   dez.style('fill', '#C51B7D').attr('font-weight', 'bold');
 
+  // Get Boxes of Tallin for the 4 months
+  const paths = d3.select('.vegaViz1 > svg').selectAll('path');
+  const tallinnSept = d3.select(paths.nodes()[35]);
+  const tallinnSeptBox = tallinnSept.node().getBBox();
+  const tallinnDez = d3.select(paths.nodes()[38]);
+  const tallinnDezBox = tallinnDez.node().getBBox();
+
   const hint5Group = d3
     .select('.vegaViz1 > svg')
     .select('.role-axis-label')
@@ -181,16 +188,45 @@ const createHintFive = () => {
     .append('circle')
     .attr('r', 10)
     .attr('cx', dezBox[0] - 18)
-    .attr('cy', dezBox[1] - 30)
+    .attr('cy', dezBox[1] - 25)
     .style('stroke', '#C51B7D')
     .style('fill', '#C51B7D');
   hint5Group
     .append('text')
     .attr('x', dezBox[0] - 18)
-    .attr('y', dezBox[1] - 25)
+    .attr('y', dezBox[1] - 20)
     .attr('text-anchor', 'middle')
     .attr('fill', 'white')
     .text('5');
+
+  hint5Group
+    .append('line')
+    .attr('x1', tallinnSeptBox.x)
+    .attr('y1', tallinnSeptBox.y)
+    .attr('x2', tallinnDezBox.x + tallinnDezBox.width)
+    .attr('y2', tallinnDezBox.y)
+    .attr('stroke', '#C51B7D')
+    .attr('stroke-width', 2);
+
+    hint5Group
+    .append('line')
+    .attr('x1', tallinnSeptBox.x)
+    .attr('y1', tallinnSeptBox.y)
+    .attr('x2', tallinnSeptBox.x)
+    .attr('y2', tallinnSeptBox.y + 20)
+    .attr('stroke', '#C51B7D')
+    .attr('stroke-width', 2);
+
+    hint5Group
+    .append('line')
+    .attr('x1', tallinnDezBox.x + tallinnDezBox.width)
+    .attr('y1', tallinnDezBox.y)
+    .attr('x2', tallinnDezBox.x + tallinnDezBox.width)
+    .attr('y2', tallinnDezBox.y + 20)
+    .attr('stroke', '#C51B7D')
+    .attr('stroke-width', 2);
+  
+
 
   return 5;
 };
