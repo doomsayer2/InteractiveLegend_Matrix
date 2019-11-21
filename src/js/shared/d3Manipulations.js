@@ -154,7 +154,7 @@ const createHintFive = () => {
     .select(".vegaViz1 > svg")
     .selectAll(".role-axis-label")
     .nodes()[0];
-  const sept = d3.select(xAxisLabel).select("text:nth-child(9)");
+  
   const oct = d3.select(xAxisLabel).select("text:nth-child(10)");
   const nov = d3.select(xAxisLabel).select("text:nth-child(11)");
   const dez = d3.select(xAxisLabel).select("text:nth-child(12)");
@@ -165,15 +165,14 @@ const createHintFive = () => {
   dezBox = dezBox.map(e => parseInt(e, 0));
 
   // febBox = febBox.map(e => parseInt(e, 0));
-  tallinnText.style("fill", "#C51B7D").attr("font-weight", "bold");
-  sept.style("fill", "#C51B7D").attr("font-weight", "bold");
+  tallinnText.style("fill", "#C51B7D").attr("font-weight", "bold");  
   oct.style("fill", "#C51B7D").attr("font-weight", "bold");
   nov.style("fill", "#C51B7D").attr("font-weight", "bold");
   dez.style("fill", "#C51B7D").attr("font-weight", "bold");
 
   // Get Boxes of Tallin for the 4 months
   const paths = d3.select(".vegaViz1 > svg").selectAll("path");
-  const tallinnSept = d3.select(paths.nodes()[35]);
+  const tallinnSept = d3.select(paths.nodes()[36]);
   const tallinnSeptBox = tallinnSept.node().getBBox();
   const tallinnDez = d3.select(paths.nodes()[38]);
   const tallinnDezBox = tallinnDez.node().getBBox();
@@ -404,11 +403,11 @@ const removeAllHints = () => {
     .select(".vegaViz1 > svg")
     .selectAll(".role-axis-label")
     .nodes()[0];
-  const sept = d3.select(xAxisLabel).select("text:nth-child(9)");
+ 
   const oct = d3.select(xAxisLabel).select("text:nth-child(10)");
   const nov = d3.select(xAxisLabel).select("text:nth-child(11)");
   const dez = d3.select(xAxisLabel).select("text:nth-child(12)");
-  sept.style("fill", "rgb(0,0,0)").attr("font-weight", "normal");
+ 
   oct.style("fill", "rgb(0,0,0)").attr("font-weight", "normal");
   nov.style("fill", "rgb(0,0,0)").attr("font-weight", "normal");
   dez.style("fill", "rgb(0,0,0)").attr("font-weight", "normal");
